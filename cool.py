@@ -1,4 +1,10 @@
 import pygame
+
+from PIL import Image
+img = Image.open("calude.jpg")
+
+img.show()
+
 pygame.init()
 
 def queue(filename):
@@ -15,7 +21,7 @@ def unpause():
 
 def pause():
     pygame.mixer.music.pause()
-    waitforaction("unpause", False, unpause)
+    waitforaction("play", False, unpause)
 
 def play(filename):
     pygame.mixer.music.load(f"{filename}.mp3")
@@ -23,7 +29,7 @@ def play(filename):
     waitforaction("pause", True, pause)
 
 
-playlist = ["weathergirl ft. Eleanor Forte 4", "Audio"]
+playlist = ["Bark Fart Sound Effect","Audio", "weathergirl ft. Eleanor Forte 4"]
 
 
 
@@ -31,8 +37,10 @@ while True:
     for i in range(len(playlist)):
         if i != len(playlist):
             queue(playlist[i+1])
+            print(f"Queued {playlist[i+1]}")
             play(playlist[i])
         elif i == len(playlist):
-            queue(0)
+            queue(playlist[0])
+            print(f"Queued {playlist[0]}")
             play(playlist[i])
 
