@@ -1,31 +1,27 @@
 import pygame
 
 from PIL import Image
-img = Image.open("calude.jpg")
 
-img.show()
 
 pygame.init()
 playlist = [
     {
         "audio": "Bark Fart Sound Effect",
-        "image": "",
+        "image": "what",
     },
     {
-        "audio": "Audio",
+        "audio": "Bark Fart Sound Effect",
         "image": "images",
     },
     {
-        "audio": "weathergirl ft. Eleanor Forte 4",
+        "audio": "Bark Fart Sound Effect",
         "image": "calude",
     }
 ]
 
-playlist = ["Bark Fart Sound Effect","Audio", "weathergirl ft. Eleanor Forte 4"]
 
-def showimage():
-    print("")
-
+def showimage(img):
+    Image.open(f"{img}.jpg").show()
 
 def queue(filename):
     pygame.mixer.music.queue(f"{filename}.mp3")
@@ -52,9 +48,13 @@ def play(filename):
 while True:
     for i in range(len(playlist)):
         if i+1 != len(playlist):
-            queue(playlist[i+1])
-            play(playlist[i])
+            queue(playlist[i+1]["audio"])
+            showimage(playlist[i]["image"])
+            play(playlist[i]["audio"])
+            print("loop playlist?")
         elif i+1 == len(playlist):
-            queue(playlist[0])
-            play(playlist[i])
+            queue(playlist[0]["audio"])
+            showimage(playlist[i]["image"])
+            play(playlist[i]["audio"])
+            print("continue playlist?")
 
