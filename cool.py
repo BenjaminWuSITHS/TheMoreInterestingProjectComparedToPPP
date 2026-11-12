@@ -1,60 +1,84 @@
 import pygame
+from PIL import Image, ImageTk
+import tkinter as tk
+from tkinter import ttk
+pygame.mixer.init()
 
-from PIL import Image
-
-
-pygame.init()
 playlist = [
     {
         "audio": "Bark Fart Sound Effect",
         "image": "what",
     },
     {
-        "audio": "Bark Fart Sound Effect",
+        "audio": "Audio",
         "image": "images",
     },
     {
-        "audio": "Bark Fart Sound Effect",
+        "audio": "weathergirl ft. Eleanor Forte 4",
         "image": "calude",
     }
 ]
 
+class gui:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("gui")
+        self.root.geometry("500x500")
 
-def showimage(img):
-    Image.open(f"{img}.jpg").show()
+        self.index = 0
+        self.paused = False
 
-def queue(filename):
-    pygame.mixer.music.queue(f"{filename}.mp3")
+        self.setui()
+        self.play()
 
-def waitforaction(action_needed, bool, returning):
-    while pygame.mixer.music.get_busy() == bool:
-        action = input()
-        if action == action_needed:
-            returning()
-def unpause():
-    pygame.mixer.music.unpause()
-    waitforaction("pause", True, pause)
+        self.check_audio_status()
 
-def pause():
-    pygame.mixer.music.pause()
-    waitforaction("play", False, unpause)
+    def setui(self):
+        frame = ttk.Frame(self.root)
+        self.title = ttk.Label(frame, text="")
+        self.img = ttk.Label(frame)
+        controls = ttk.Frame(frame)
+        self.previous = ttk.Button(controls, text="previous", command=self.previous_button)
+        self.next = ttk.Button(controls, text="next", command=self.next_button)
+        self.pause = ttk.Button(controls, text="pause", command = self.play_pause)
 
-def play(filename):
-    pygame.mixer.music.load(f"{filename}.mp3")
-    pygame.mixer.music.play()
-    waitforaction("pause", True, pause)
+    def play(self):
+        song = playlist[self.index]
+        self.title.config(text=song["audio"])
+
+        img = Image.open(f"{song['image']}.jpg")
+        self.photo = ImageTk.PhotoImage(img)
+        self.img.config(image=self.photo)
+
+        pygame.mixer.music.load(f"{song['audio']}.mp3")
+        pygame.mixer.music.play()
+        self.paused = False
+        self.pause.config(text="Pause")
+
+    def play_pause(self):
+        if self.paused == True:
+            pygame.mixer.music.unpause()
+            self.paused = False
+            self.pause.config(text="Pause")
+        else:
+            pygame.mixer.music.pause()
+            self.paused = True
+            self.pause.config(text="Play")
+  
+    def next_button(self):
+        self.index = (self.index + 1) % len(playlist)
+        self.play()
+
+    def previous_button(self):
+        self.index = (self.index - 1) % len(playlist)
+        self.play()
+
+    def check_audio_status(self):
+        if not pygame.mixer.music.get_busy() and not self.paused:
+            self.next_button()
+        self.root.after(1000, self.check_audio_status)
 
 
-while True:
-    for i in range(len(playlist)):
-        if i+1 != len(playlist):
-            queue(playlist[i+1]["audio"])
-            showimage(playlist[i]["image"])
-            play(playlist[i]["audio"])
-            print("loop playlist?")
-        elif i+1 == len(playlist):
-            queue(playlist[0]["audio"])
-            showimage(playlist[i]["image"])
-            play(playlist[i]["audio"])
-            print("continue playlist?")
-
+root = tk.Tk()
+app = gui(root)
+root.mainloop()
