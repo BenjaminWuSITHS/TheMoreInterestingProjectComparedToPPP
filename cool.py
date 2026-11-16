@@ -5,9 +5,6 @@ from tkinter import ttk
 pygame.mixer.init()
 
 
-while True:
-    Warning("Warning!")
-
 playlist = [
     {
         "audio": "Audio",
