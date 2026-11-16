@@ -24,8 +24,16 @@ playlist = [
     },
     {
         "audio": "inabakumori - Lagtrain (Vo. Kaai Yuki)",
-        "image": "i made this song"
+        "image": "dolly"
     },
+    {
+        "audio": "Steal a brainrot (Epics)",
+        "image": "why"
+    },
+    {
+        "audio": "tiki tiki phonk",
+        "image": "bestimage"
+    }
 ]
 
 class gui:
