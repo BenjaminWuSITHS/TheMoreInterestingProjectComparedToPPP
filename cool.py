@@ -21,7 +21,11 @@ playlist = [
     {
         "audio": "Obelisk of SOOO retro",
         "image": "image02"
-    }
+    },
+    {
+        "audio": "inabakumori - Lagtrain (Vo. Kaai Yuki)",
+        "image": "i made this song"
+    },
 ]
 
 class gui:
