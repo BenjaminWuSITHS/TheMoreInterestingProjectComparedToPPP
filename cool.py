@@ -33,6 +33,22 @@ playlist = [
     {
         "audio": "tiki tiki phonk",
         "image": "bestimage"
+    },
+    {
+        "audio": "67 Funk (Sped Up)",
+        "image": "67676767"
+    },
+    {
+        "audio": "3 LAYER DIP STACK PHONK",
+        "image": "dipstackphonk"
+    },
+    {
+        "audio": "he took a bite of a boneless wing phonk",
+        "image": "biteofbonelesswing"
+    },
+    {
+        "audio": "OHIO FINAL BOSS - Funk",
+        "image": "p"
     }
 ]
 
@@ -40,7 +56,7 @@ class gui:
     def __init__(self, root):
         self.root = root
         self.root.title("audio player")
-        self.root.geometry("500x500")
+        self.root.geometry("700x700")
 
         self.index = 0
         self.paused = False
@@ -59,9 +75,9 @@ class gui:
         self.img.pack()
         controls = ttk.Frame(frame)
         controls.pack()
-        self.previous = ttk.Button(controls, text="previous", command=self.previous_button)
+        self.previous = ttk.Button(controls, text="Previous", command=self.previous_button)
         self.previous.pack()
-        self.next = ttk.Button(controls, text="next", command=self.next_button)
+        self.next = ttk.Button(controls, text="Next", command=self.next_button)
         self.next.pack()
         self.pause = ttk.Button(controls, text="pause", command = self.play_pause)
         self.pause.pack()
@@ -71,7 +87,7 @@ class gui:
         self.title.config(text=song["audio"])
 
         img = Image.open(f"{song['image']}.jpg")
-        img = img.resize((250, 250), Image.Resampling.LANCZOS)
+        img = img.resize((500, 500), Image.Resampling.LANCZOS)
         self.photo = ImageTk.PhotoImage(img)
         self.img.config(image=self.photo)
 
