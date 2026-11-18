@@ -49,7 +49,27 @@ playlist = [
     {
         "audio": "OHIO FINAL BOSS - Funk",
         "image": "p"
-    }
+    },
+    {
+        "audio": "RobTop - Geometry Dash Menu Theme 4",
+        "image": "gd"
+    },
+    {
+        "audio": "Sunflower x Bohemian Rhapsody x Verity x Misery x Funky ehh x gubby this, Gubby that x Rin tin tin",
+        "image": "hgd"
+    },
+    {
+        "audio": "Who I Am (Official Music Video)",
+        "image": "whoiam"
+    },
+    {
+        "audio": "Obby Fail 99 Times",
+        "image": "roblox99"
+    },
+    {
+        "audio": "LA PEACE FUNK",
+        "image": "lapeace"
+    },
 ]
 
 class gui:
